@@ -34,44 +34,56 @@ namespace GameOfLifeReloaded.Screens
 		{
             const int rectangleWidth = 16;
             const int rectangleHeight = 16;
-
-            int border = 8;
-
+            
             float numberOfRectangles = (FlatRedBallServices.GraphicsOptions.ResolutionHeight / rectangleHeight)
                 * (FlatRedBallServices.GraphicsOptions.ResolutionWidth / rectangleWidth);
 
-            float numberOfRectanglesX = FlatRedBallServices.GraphicsOptions.ResolutionWidth / rectangleWidth - 1;
-            float numberOfRectanglesY = FlatRedBallServices.GraphicsOptions.ResolutionHeight / rectangleHeight - 1;        
-           
+            float numberOfRectanglesX = (FlatRedBallServices.GraphicsOptions.ResolutionWidth / rectangleWidth);
+            float numberOfRectanglesY = (FlatRedBallServices.GraphicsOptions.ResolutionHeight / rectangleHeight);
 
-            for (int x = 0; x < numberOfRectanglesX; x++)
-            {
-                for (int y = 0; y < numberOfRectanglesY; y++)
-                {
-
-                    /*// Let's spread out the rectangles
+            /*// Let's spread out the rectangles
                     const float minBoundary = -3000;
                     const float range = 6000;*/
 
+            AxisAlignedRectangle newRectangle = new AxisAlignedRectangle();
+            newRectangle.Visible = true;
+            newRectangle.X = 0;
+
+            newRectangle.Y = 0;
+
+            newRectangle.Width = rectangleWidth;
+            newRectangle.Height = rectangleHeight;
+
+            Cells.AxisAlignedRectangles.Add(newRectangle);
+
+            /*for (int x = 0; x < numberOfRectanglesX ; x++)
+            {
+                for (int y = 0; y < numberOfRectanglesY ; y++)
+                {
+
+                    
+
                     AxisAlignedRectangle newRectangle = new AxisAlignedRectangle();
                     newRectangle.Visible = true;
-                    newRectangle.X = (x * rectangleWidth) - (FlatRedBallServices.GraphicsOptions.ResolutionWidth / 2) + border;
+                    newRectangle.X = (x * rectangleWidth) + rectangleWidth ;
 
-                    newRectangle.Y = (y * rectangleHeight) - (FlatRedBallServices.GraphicsOptions.ResolutionHeight / 2) + border;
+                    newRectangle.Y = (y * rectangleHeight) + rectangleHeight ;
 
                     newRectangle.Width = rectangleWidth;
                     newRectangle.Height = rectangleHeight;
 
                     Cells.AxisAlignedRectangles.Add(newRectangle);
                 }
-            }
+            }*/
 
 		}
 
 		void CustomActivity(bool firstTimeCalled)
 		{
+            string resultStringX = "MouseX: " + InputManager.Mouse.X;
+            string resultStringY = "MouseY: " + InputManager.Mouse.Y;
 
-
+            FlatRedBall.Debugging.Debugger.Write(resultStringX + "\n" + resultStringY);    
 		}
 
 		void CustomDestroy()
