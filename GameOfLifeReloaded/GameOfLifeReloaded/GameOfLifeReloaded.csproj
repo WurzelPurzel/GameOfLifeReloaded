@@ -114,6 +114,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataTypes\TileMapInfo.Generated.cs" />
+    <Compile Include="Entities\Cell_Alive.cs" />
+    <Compile Include="Entities\Cell_Alive.Generated.cs">
+      <DependentUpon>Cell_Alive.cs</DependentUpon>
+    </Compile>
     <Compile Include="GlobalContent.Generated.cs" />
     <Compile Include="Performance\IEntityFactory.Generated.cs" />
     <Compile Include="Performance\IPoolable.Generated.cs" />
@@ -121,6 +125,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Game1.cs" />
+    <Compile Include="Screens\Spielfeld.cs" />
+    <Compile Include="Screens\Spielfeld.Generated.cs">
+      <DependentUpon>Spielfeld.cs</DependentUpon>
+    </Compile>
     <Compile Include="Setup\CameraSetup.cs" />
     <Compile Include="TileCollisions\TileShapeCollection.cs" />
     <Compile Include="TileEntities\TileEntityInstantiator.cs" />

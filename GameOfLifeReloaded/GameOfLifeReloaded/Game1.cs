@@ -44,8 +44,13 @@ namespace GameOfLifeReloaded
             FlatRedBallServices.InitializeFlatRedBall(this, graphics);
 			CameraSetup.SetupCamera(SpriteManager.Camera, graphics);
 			GlobalContent.Initialize();
+            IsMouseVisible = true;
 
-            //ScreenManager.Start(typeof(SomeScreen).FullName);
+            //sets resolution to 1280x720 resoulution
+            FlatRedBallServices.GraphicsOptions.SetResolution(/*GraphicsDevice.DisplayMode.Width,GraphicsDevice.DisplayMode.Height*/1280, 720);
+
+            //Spielfeld als Startscreen
+			FlatRedBall.Screens.ScreenManager.Start(typeof(GameOfLifeReloaded.Screens.Spielfeld));
 
             base.Initialize();
         }
