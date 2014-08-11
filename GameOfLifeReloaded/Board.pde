@@ -1,18 +1,21 @@
 class Board
 {
-  int rectangleWidth = 16;  //Größe der Zellen
-  int rectangleHeight = 16;  
+  int cellWidth = 16;  //Größe der Zellen
+  int cellHeight = 16;  
 
-  float numberOfRectanglesX = width/rectangleWidth - 2;  //Anzahl der Zellen horizontal und
-  float numberOfRectanglesY = height/rectangleHeight - 2;  //vertikal, + Rand
+  float numberOfCellsX = width/cellWidth - 2;  //Anzahl der Zellen horizontal und
+  float numberOfCellsY = height/cellHeight - 2;  //vertikal, + Rand
   
-  int status[][] = new int [(int) numberOfRectanglesX][(int) numberOfRectanglesY];  //Status der Zellen
+  int status[][] = new int [(int) numberOfCellsX][(int) numberOfCellsY];  //Status der Zellen
+  
+  color alive = color(0, 255, 0);  //Alive = grün
+  color dead = color(255);  //Tot = weiß
 
   Board ()
   {
-    for (int i = 0; i < numberOfRectanglesX; i++)
+    for (int i = 0; i < numberOfCellsX; i++)
     {
-      for (int j = 0; j < numberOfRectanglesY; j++)
+      for (int j = 0; j < numberOfCellsY; j++)
       {
         status[i][j] = 0;  //Zu Beginn alle Zellen tot
       }
@@ -21,22 +24,24 @@ class Board
 
   void display()
   {
-    for (int x = 1; x <= numberOfRectanglesX; x++)
+    for (int x = 1; x <= numberOfCellsX; x++)
     {
-      for (int y = 1; y <= numberOfRectanglesY; y++)
+      for (int y = 1; y <= numberOfCellsY; y++)
       {  
-        if (status[x-1][y-1] == 1)  //Wenn Zelle am leben, dann färbe grün
+        if (status[x-1][y-1] == 1)  
         {
-          fill(0, 255, 0);  
+          fill(alive);  //Wenn Zelle am leben, fülle
         }
         else
         {
-          fill(255);  //Sonst tot, also weiß
+          fill(dead);  //Sonst tot
         }
         stroke(0);
-        rect(rectangleWidth*x, rectangleHeight*y, rectangleWidth, rectangleHeight);
+        rect(cellWidth*x, cellHeight*y, cellWidth, cellHeight);
       }
     }
-  }
+  } 
+
+  
 }
 
