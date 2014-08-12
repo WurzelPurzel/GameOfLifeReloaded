@@ -26,9 +26,13 @@ void mousePressed()
 void draw()
 {  
   feld.display();
-  if (!manager.isPaused)
+  if (millis() - manager.lastRecordedTime > manager.interval)  //Wenn das Interval überschritten wurde
   {
-    feld.evolve();
+    if (!manager.isPaused)  //und das Spiel nicht pausiert ist
+    {
+      feld.evolve();  //führe die Entwicklungen durch
+      manager.lastRecordedTime = millis();  //Aktualisiere den zuletzt benutzten Zeitpunkt
+    }
   }
 }
 
