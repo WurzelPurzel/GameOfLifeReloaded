@@ -1,5 +1,6 @@
 Board feld; 
 Spieler spieler1;
+Manager manager;
 
 void setup()
 {
@@ -25,7 +26,10 @@ void mousePressed()
 void draw()
 {  
   feld.display();
-  feld.evolve();
+  //if (!manager.isPaused)
+  {
+    feld.evolve();
+  }
 }
 
 
