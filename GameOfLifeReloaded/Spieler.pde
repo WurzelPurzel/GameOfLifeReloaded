@@ -11,19 +11,21 @@ class Spieler
   {
     if (mousePressed)
     {
-      int inCellX = int(map(mouseX, 0, width, 0, _field.numberOfCellsX));
-      inCellX = int(constrain(inCellX, 0, _field.numberOfCellsX - 1));
+      int inCellX = int(map(mouseX, 0, width, 0, _field.numberOfCellsX));  //Konvertiert MauspositionX auf Array-Indizes
+      inCellX = int(constrain(inCellX, 0, _field.numberOfCellsX - 1));  //Verhindert OutOfBounds Error
       
-      int inCellY = int(map(mouseY, 0, height, 0, _field.numberOfCellsY));
-      inCellY = int(constrain(inCellY, 0, _field.numberOfCellsY - 1));  
+      int inCellY = int(map(mouseY, 0, height, 0, _field.numberOfCellsY));  //Konvertiert MauspositionY auf Array-Indizes
+      inCellY = int(constrain(inCellY, 0, _field.numberOfCellsY - 1));  //Verhindert OutOfBounds Error 
       
       if (_field.saveStat[inCellX][inCellY] == 0)
       {
-        _field.status[inCellX][inCellY] = 1;
+        _field.status[inCellX][inCellY] = 1;  //Wenn Zelle tot, dann belebe
+        fill(_field.alive);
       }
       else
       {
-        _field.status[inCellX][inCellY] = 0;
+        _field.status[inCellX][inCellY] = 0;  //sonst töte
+        fill(_field.dead);
       }
     }
     else
