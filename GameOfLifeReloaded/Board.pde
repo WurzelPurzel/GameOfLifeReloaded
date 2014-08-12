@@ -3,8 +3,8 @@ class Board
   int cellWidth = 16;  //Größe der Zellen
   int cellHeight = 16;  
 
-  float numberOfCellsX = width/cellWidth - 2;  //Anzahl der Zellen horizontal und
-  float numberOfCellsY = height/cellHeight - 2;  //vertikal, + Rand
+  float numberOfCellsX = width/cellWidth;  //Anzahl der Zellen horizontal und
+  float numberOfCellsY = height/cellHeight;  //vertikal, + Rand
   
   int status[][] = new int [(int) numberOfCellsX][(int) numberOfCellsY];  //Status der Zellen
   
@@ -24,11 +24,11 @@ class Board
 
   void display()
   {
-    for (int x = 1; x <= numberOfCellsX; x++)
+    for (int x = 0; x < numberOfCellsX; x++)
     {
-      for (int y = 1; y <= numberOfCellsY; y++)
+      for (int y = 0; y < numberOfCellsY; y++)
       {  
-        if (status[x-1][y-1] == 1)  
+        if (status[x][y] == 1)  
         {
           fill(alive);  //Wenn Zelle am leben, fülle
         }
