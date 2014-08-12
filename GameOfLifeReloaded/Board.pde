@@ -9,6 +9,7 @@ class Board
   float numberOfCellsY = height/cellHeight;  //vertikal, + Rand
   
   int status[][] = new int [(int) numberOfCellsX][(int) numberOfCellsY];  //Status der Zellen
+  int saveStat[][] = new int [(int) numberOfCellsX][(int) numberOfCellsY];  //Array zum Zwischenspeichern
   
   color alive = color(0, 255, 0);  //Alive = grün
   color dead = color(255);  //Tot = weiß
@@ -46,6 +47,14 @@ class Board
   
   void evolve()  //Wendet die Regeln jede Runde an
   {
+    for (int x = 0; x < numberOfCellsX; x++)  //Speichert Status
+        {
+          for (int y = 0; y < numberOfCellsY; y++)
+          {
+            saveStat[x][y] = status[x][y];
+          }  
+        }    
+    
     for (int x = 0; x < numberOfCellsX; x++)  //Alle Zellen überprüfen
     {
       for (int y = 0; y < numberOfCellsY; y++)
@@ -59,7 +68,7 @@ class Board
             {
               if (!((xN == x) && (yN == y)))  //Die aktuelle Zelle NICHT prüfen, nur die Nachbarn
               {
-                if (status[xN][yN] == 1)
+                if (saveStat[xN][yN] == 1)
                 {
                   neighbours++;  //Lebende Nachbarn zählen  
                 }
@@ -67,8 +76,8 @@ class Board
             }
           } 
         }
-        
-        if (status[x][y] == 1)  //Wenn die Zelle lebt, je nach Nachbarzahl töten
+        //Jetzt Regeln anwenden
+        if (saveStat[x][y] == 1)  //Wenn die Zelle lebt, je nach Nachbarzahl töten
         {
           if (neighbours < 2 || neighbours > 3)
           {
