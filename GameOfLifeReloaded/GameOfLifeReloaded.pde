@@ -4,9 +4,7 @@ Manager manager;
 
 void setup()
 {
-  size(1280,720);
-  
-  frameRate(18);  
+  size(1280,720);   
   
   feld = new Board();  
   spieler1 = new Spieler(feld);
