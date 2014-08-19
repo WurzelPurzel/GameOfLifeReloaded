@@ -11,7 +11,8 @@ class Board
   int status[][] = new int [(int) numberOfCellsX][(int) numberOfCellsY];  //Status der Zellen
   int saveStat[][] = new int [(int) numberOfCellsX][(int) numberOfCellsY];  //Array zum Zwischenspeichern
   
-  color alive = color(0, 255, 0);  //Alive = grün
+  color p1 = color(0, 220, 0);  //Spieler1 = grün
+  color p2 = color(0, 0, 220);  //Spieler2 = blau
   color dead = color(255);  //Tot = weiß
 
   Board ()
@@ -33,7 +34,11 @@ class Board
       {  
         if (status[x][y] == 1)  
         {
-          fill(alive);  //Wenn Zelle am leben, fülle
+          fill(p1);  //Wenn Zelle Status 1 hat, fülle Spieler1
+        }
+        else if (status[x][y] == 2)
+        {
+          fill(p2);  //Wenn Zelle Status 2 hat, fülle Spieler2
         }
         else
         {
@@ -59,7 +64,8 @@ class Board
     {
       for (int y = 0; y < numberOfCellsY; y++)
       {
-        int neighbours = 0;  //Nachbarn zählen
+        int neighboursP1 = 0;  
+        int neighboursP2 = 0;  //Nachbarn jeder Farbe zählen
         for (int xN = x-1; xN <= x+1; xN++)  //Alle Nachbarn überprüfen
         {
           for (int yN = y-1; yN <= y+1; yN++)
@@ -68,9 +74,13 @@ class Board
             {
               if (!((xN == x) && (yN == y)))  //Die aktuelle Zelle NICHT prüfen, nur die Nachbarn
               {
-                if (saveStat[xN][yN] == 1)
+                if (saveStat[xN][yN] == 1)  //Nachbarn der p1 Farbe zählen
                 {
-                  neighbours++;  //Lebende Nachbarn zählen  
+                  neighboursP1++;  //Lebende Nachbarn zählen  
+                }
+                else if (saveStat[xN][yN] == 2)  //Nachbarn der p2 Farbe zählen
+                {
+                  neighboursP2++;  //Lebende Nachbarn zählen
                 }
               }  
             }
@@ -79,16 +89,40 @@ class Board
         //Jetzt Regeln anwenden
         if (saveStat[x][y] == 1)  //Wenn die Zelle lebt, je nach Nachbarzahl töten
         {
-          if (neighbours < 2 || neighbours > 3)
+          if (neighboursP1 < 2 || neighboursP1 > 3)  //Wenn nicht 2-3 Nachbarn von Spieler1 leben, töten
           {
-            status[x][y] = 0;  //Töten, wenn nicht 2 - 3 Nachbarn leben  
+            status[x][y] = 0;  //Töten  
           }
+        }
+        else if (saveStat[x][y] == 2)  //Gleiches für Spieler2 nochmal
+        {
+          if (neighboursP2 < 2 || neighboursP2 > 3)  
+          {
+            status[x][y] = 0;  //Töten  
+          }  
         }
         else  //Zelle ist tot, je nach Nachbarzahl beleben
         {
-          if (neighbours == 3)
+          //Wenn 3 Nachbarn leben, belebe die Zelle
+          if (neighboursP1 == 3 && neighboursP2 == 3)  //Wenn Zelle jeweils von Spieler1 und Spieler2 3 lebende Nachbarn hat, wähle zufällig
           {
-            status[x][y] = 1;  //Wenn 3 Nachbarn leben, belebe die Zelle  
+            float r = random(1, 3);
+            if (r == 1)  //Wenn zufällige Zahl (1-2) 1 ist
+            {
+              status[x][y] = 1;  //Belebe Spieler1
+            }  
+            else
+            {
+              status[x][y] = 2;  //Sonst belebe Spieler2
+            }
+          }
+          else if (neighboursP1 == 3)  //Spieler1
+          {
+            status[x][y] = 1;    
+          }
+          else if (neighboursP2 == 3) //Spieler2
+          {
+            status[x][y] = 2;  
           }
         }
       }
