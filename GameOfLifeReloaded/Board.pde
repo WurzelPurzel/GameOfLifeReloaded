@@ -93,13 +93,21 @@ class Board
           {
             status[x][y] = 0;  //Töten  
           }
+          else if ((neighboursP1 + 1) < neighboursP2)  //Wenn gewählte Zelle + ihre verbündeten Nachbarn weniger sind als gegnerische Nachbarn
+          {
+            status[x][y] = 0;  //STIRB!
+          }
         }
         else if (saveStat[x][y] == 2)  //Gleiches für Spieler2 nochmal
         {
           if (neighboursP2 < 2 || neighboursP2 > 3)  
           {
             status[x][y] = 0;  //Töten  
-          }  
+          } 
+          else if ((neighboursP2 + 1) < neighboursP1)  //Wenn gewählte Zelle + ihre verbündeten Nachbarn weniger sind als gegnerische Nachbarn
+          {
+            status[x][y] = 0;  //STIRB!
+          } 
         }
         else  //Zelle ist tot, je nach Nachbarzahl beleben
         {
