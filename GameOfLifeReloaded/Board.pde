@@ -48,7 +48,19 @@ class Board
         rect(cellWidth*x, cellHeight*y, cellWidth, cellHeight);
       }
     }
-  } 
+  }
+ 
+  void reset()
+  {
+    //Setze alle Zellen zurück
+    for (int x = 0; x < numberOfCellsX; x++)
+    {
+      for (int y = 0; y < numberOfCellsY; y++)
+      {
+        status[x][y] = 0; 
+      }
+    }  
+  }
   
   void evolve()  //Wendet die Regeln jede Runde an
   {

@@ -1,5 +1,7 @@
 class Manager
 {
+  Board _field;
+  
   //Pause
   boolean isPaused = true;
   
@@ -25,5 +27,12 @@ class Manager
     {
       player1Turn = !player1Turn;  
     }
-  }  
+    
+    if ((key == 'r' || key == 'R') && isPaused)
+    {
+      _field.reset();  
+    }
+  } 
+ 
+  
 }
