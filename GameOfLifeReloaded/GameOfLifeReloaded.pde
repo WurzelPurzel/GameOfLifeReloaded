@@ -10,7 +10,7 @@ void setup()
   feld = new Board();  
   spieler1 = new Spieler(feld, 1);
   spieler2 = new Spieler(feld, 2);
-  manager = new Manager();
+  manager = new Manager(feld);
   
   background(255);
   stroke(0);

@@ -11,9 +11,9 @@ class Manager
   
   boolean player1Turn = true;
 
-  Manager()
+  Manager(Board field)
   {
-  
+    _field = field;
   }
 
   void keyPressed()
