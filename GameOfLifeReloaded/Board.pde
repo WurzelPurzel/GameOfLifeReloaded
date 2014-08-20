@@ -107,7 +107,7 @@ class Board
           }
           else if ((neighboursP1 + 1) < neighboursP2)  //Wenn gewählte Zelle + ihre verbündeten Nachbarn weniger sind als gegnerische Nachbarn
           {
-            status[x][y] = 0;  //STIRB!
+            status[x][y] = 2;  //Zelle wird übernommen
           }
         }
         else if (saveStat[x][y] == 2)  //Gleiches für Spieler2 nochmal
@@ -118,7 +118,7 @@ class Board
           } 
           else if ((neighboursP2 + 1) < neighboursP1)  //Wenn gewählte Zelle + ihre verbündeten Nachbarn weniger sind als gegnerische Nachbarn
           {
-            status[x][y] = 0;  //STIRB!
+            status[x][y] = 1;  //Zelle wird übernommen
           } 
         }
         else  //Zelle ist tot, je nach Nachbarzahl beleben
@@ -126,12 +126,12 @@ class Board
           //Wenn 3 Nachbarn leben, belebe die Zelle
           if (neighboursP1 == 3 && neighboursP2 == 3)  //Wenn Zelle jeweils von Spieler1 und Spieler2 3 lebende Nachbarn hat, wähle zufällig
           {
-            float r = random(1, 3);
+            int r = int(random(1, 3));
             if (r == 1)  //Wenn zufällige Zahl (1-2) 1 ist
             {
               status[x][y] = 1;  //Belebe Spieler1
             }  
-            else
+            else if (r == 2)
             {
               status[x][y] = 2;  //Sonst belebe Spieler2
             }
