@@ -65,11 +65,11 @@ class Board
       }
     }
     fill(0);
-    text("Cells Left P1:" +" "+ maxCellsP1, 50, height - (borderYbottom/2));
-    text("Cell Left P2:" + " "+ maxCellsP2, 600, height - (borderYbottom/2));
-    text("Cells P1 Total:" +" " + currentCellsP1, 50, height - (borderYbottom/3));
-    text("Cell P2 Total:" + " " + currentCellsP2, 600, height - (borderYbottom/3));
-  }
+    text("Cells Left P1:" +" "+ maxCellsP1, width/4, height - 2*(borderYbottom/3) + borderYtop);
+    text("Cell Left P2:" + " "+ maxCellsP2, 3*width/4, height - 2*(borderYbottom/3) + borderYtop);
+    text("Cells P1 Total:" +" " + currentCellsP1, width/4, height - (borderYbottom/3) + borderYtop);
+    text("Cell P2 Total:" + " " + currentCellsP2, 3*width/4, height - (borderYbottom/3) + borderYtop);
+  }  
 
   void reset()
   {

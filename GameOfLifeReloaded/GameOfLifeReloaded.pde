@@ -28,7 +28,7 @@ void setup()
   manager = new Manager(feld);
   TextFont = createFont("Arial", 16);
   textFont(TextFont);
-  textAlign(LEFT,BOTTOM);
+  textAlign(CENTER);
   
   background(255);
   stroke(0);
@@ -58,6 +58,21 @@ void draw()
     {
       feld.evolve();  //führe die Entwicklungen durch
       manager.lastRecordedTime = millis();  //Aktualisiere den zuletzt benutzten Zeitpunkt
+    }
+    else if (rounds == 0)
+    {
+      if (currentCellsP1 > currentCellsP2)
+      {
+        spieler1.WinMessage();
+      }  
+      else if (currentCellsP1 < currentCellsP2)
+      {
+        spieler2.WinMessage(); 
+      }
+      else if (currentCellsP1 == currentCellsP2)
+      {
+        spieler1.DrawMessage(); 
+      }
     }
   }
 }
