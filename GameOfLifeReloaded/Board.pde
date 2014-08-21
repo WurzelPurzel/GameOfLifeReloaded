@@ -92,6 +92,7 @@ class Board
     currentCellsP1 = 0;
     maxCellsP2 = 25;
     currentCellsP2 = 0;
+    rounds = 100;
   }
 
   void evolve()  //Wendet die Regeln jede Runde an
