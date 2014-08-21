@@ -9,6 +9,7 @@ public static int borderYtop = 16;
 public static int borderYbottom = 200;
 public static int maxCellsP1 = 25;
 public static int maxCellsP2 = 25;
+public static int rounds = 100;
 
 void setup()
 { 
@@ -42,7 +43,7 @@ void draw()
   feld.display();
   if (millis() - manager.lastRecordedTime > manager.interval)  //Wenn das Interval überschritten wurde
   {
-    if (!manager.isPaused)  //und das Spiel nicht pausiert ist
+    if (!manager.isPaused && rounds > 0)  //und das Spiel nicht pausiert ist und die Runden noch nicht abgelaufen sind
     {
       feld.evolve();  //führe die Entwicklungen durch
       manager.lastRecordedTime = millis();  //Aktualisiere den zuletzt benutzten Zeitpunkt

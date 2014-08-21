@@ -65,6 +65,8 @@ class Board
   
   void evolve()  //Wendet die Regeln jede Runde an
   {
+    rounds -= 1;
+    
     for (int x = 0; x < numberOfCellsX; x++)  //Speichert Status
         {
           for (int y = 0; y < numberOfCellsY; y++)
