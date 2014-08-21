@@ -12,28 +12,14 @@ class Board
 
   color p1 = color(0, 220, 0);  //Spieler1 = grün
   color p2 = color(0, 0, 220);  //Spieler2 = blau
-  color neutral = color(255, 255, 0); // Neutral = gelb
+  color neutral = color(255, 0, 0); // Neutral = gelb
   color dead = color(255);  //Tot = weiß
 
   Board ()
   { 
-    for (int x = 0; x < numberOfCellsX; x++)
-    {
-      for (int y = 0; y < numberOfCellsY; y++)
-      {  
-        if ( x > numberOfCellsX/3 && x <= numberOfCellsX - numberOfCellsX/3 && maxCellsNeutral > 0)
-        {
-          status [x][y] =3;
-          maxCellsNeutral -= 1;
-        }
-        else
-        {
-          status[x][y] = 0;  //Zu Beginn alle Zellen tot
-        }
-      }
-    }
+    reset();
   }
-
+  
   void display()
   {    
     for (int x = 0; x < numberOfCellsX; x++)
@@ -69,21 +55,21 @@ class Board
 
   void reset()
   {
-    //Setze alle Zellen zurück
-    maxCellsNeutral = 50;
-    
     for (int x = 0; x < numberOfCellsX; x++)
     {
       for (int y = 0; y < numberOfCellsY; y++)
-      {
-        status[x][y] = 0;
-        if (x > numberOfCellsX/3 && x <= numberOfCellsX - numberOfCellsX/3 && maxCellsNeutral > 0 )
+      {  
+        status[x][y] = 0;  //Zu Beginn alle Zellen tot
+        if ( x > numberOfCellsX/3 && x <= numberOfCellsX - numberOfCellsX/3)
         {
-          status [x][y] =3;
-          maxCellsNeutral -=1;
+          noiseSeed((int) random(0,100000));
+          if (noise(x, y) > 0.6)     //Erstellt Perlin-Noise (Dichte Funktion)
+          {
+            status [x][y] = 3;
+          }
         }
       }
-    } 
+    }  
     maxCellsP1 = 25;
     maxCellsP2 = 25;
   }
@@ -152,7 +138,7 @@ class Board
           else if ((neighboursP2 + 1) < neighboursP1)  //Wenn gewählte Zelle + ihre verbündeten Nachbarn weniger sind als gegnerische Nachbarn
           {
             status[x][y] = 1;  //Zelle wird übernommen
-          } 
+          }
         } 
         else if (saveStat[x][y] == 3)  //Gleiches für Neutral nochmal
         {

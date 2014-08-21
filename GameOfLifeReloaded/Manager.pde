@@ -3,7 +3,7 @@ class Manager
   Board _field;
   
   //Pause
-  boolean isPaused = true;
+
   
   //Timer
   int interval = 100;  //Alle 0,1 Sekunden wird ein Zug durchgeführt
@@ -20,7 +20,14 @@ class Manager
   {
     if (key == ' ')  //Pausiere/Beende Pause, wenn Space gedrückt wird
     {
-      isPaused = !isPaused;  
+      if(!isPaused)
+      {
+      isPaused = true;
+      } 
+      else if(isPaused)
+      {
+        isPaused = false;
+      }
     }
     
     if (key == TAB)
