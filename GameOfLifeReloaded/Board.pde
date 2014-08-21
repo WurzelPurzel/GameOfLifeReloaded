@@ -67,8 +67,8 @@ class Board
     fill(0);
     text("Cells Left P1:" +" "+ maxCellsP1, 50, height - (borderYbottom/2));
     text("Cell Left P2:" + " "+ maxCellsP2, 600, height - (borderYbottom/2));
-    text("Cells P1 Total:" +" ", 50, height - (borderYbottom/3));
-    text("Cell P2 Total:" + " ", 600, height - (borderYbottom/3));
+    text("Cells P1 Total:" +" " + currentCellsP1, 50, height - (borderYbottom/3));
+    text("Cell P2 Total:" + " " + currentCellsP2, 600, height - (borderYbottom/3));
   }
 
   void reset()
@@ -138,29 +138,38 @@ class Board
           }
         }
         //Jetzt Regeln anwenden
+        // ------------------------------- SPIELER 1 -----------------------------------
         if (saveStat[x][y] == 1)  //Wenn die Zelle lebt, je nach Nachbarzahl töten
         {
           if (neighboursP1 < 2 || neighboursP1 > 3)  //Wenn nicht 2-3 Nachbarn von Spieler1 leben, töten
           {
             status[x][y] = 0;  //Töten
+            currentCellsP1 -= 1;
           }
           else if ((neighboursP1 + 1) < neighboursP2)  //Wenn gewählte Zelle + ihre verbündeten Nachbarn weniger sind als gegnerische Nachbarn
           {
             status[x][y] = 2;  //Zelle wird übernommen
+            currentCellsP1 -= 1;
+            currentCellsP2 += 1;
           }
         }
-        else if (saveStat[x][y] == 2)  //Gleiches für Spieler2 nochmal
+        // ------------------------------- SPIELER 2 -----------------------------------
+        else if (saveStat[x][y] == 2) 
         {
           if (neighboursP2 < 2 || neighboursP2 > 3)  
           {
             status[x][y] = 0;  //Töten
+            currentCellsP2 -= 1;
           } 
           else if ((neighboursP2 + 1) < neighboursP1)  //Wenn gewählte Zelle + ihre verbündeten Nachbarn weniger sind als gegnerische Nachbarn
           {
             status[x][y] = 1;  //Zelle wird übernommen
+            currentCellsP1 += 1;
+            currentCellsP2 -= 1;
           }
         } 
-        else if (saveStat[x][y] == 3)  //Gleiches für Neutral nochmal
+        // ------------------------------- NEUTRAL -----------------------------------
+        else if (saveStat[x][y] == 3) 
         {
           if (neighboursNeutral < 2 || neighboursNeutral > 3)  
           {
@@ -169,10 +178,12 @@ class Board
           else if (0 < neighboursP1)  //Wenn gewählte Zelle + ihre verbündeten Nachbarn weniger sind als gegnerische Nachbarn
           {
             status[x][y] = 1;  //Zelle wird übernommen
+            currentCellsP1 += 1;
           } 
           else if (0 < neighboursP2)  //Wenn gewählte Zelle + ihre verbündeten Nachbarn weniger sind als gegnerische Nachbarn
           {
             status[x][y] = 2;  //Zelle wird übernommen
+            currentCellsP2 += 1;
           }
         }
         else  //Zelle ist tot, je nach Nachbarzahl beleben
@@ -184,19 +195,23 @@ class Board
             if (r == 1)  //Wenn zufällige Zahl (1-2) 1 ist
             {
               status[x][y] = 1;  //Belebe Spieler1
+              currentCellsP1 += 1;
             }  
             else if (r == 2)
             {
               status[x][y] = 2;  //Sonst belebe Spieler2
+              currentCellsP2 += 1;
             }
           }
           else if (neighboursP1 == 3)  //Spieler1
           {
             status[x][y] = 1;
+            currentCellsP1 += 1;
           }
           else if (neighboursP2 == 3) //Spieler2
           {
             status[x][y] = 2;
+            currentCellsP2 += 1;
           }
           else if (neighboursNeutral == 3)
           {
