@@ -1,4 +1,4 @@
- Board feld; 
+Board feld; 
 Spieler spieler1;
 Spieler spieler2;
 Manager manager;
@@ -20,7 +20,7 @@ void setup()
 { 
   size(800 + borderXleft + borderXright,640 + borderYtop + borderYbottom);   
   
-  feld = new Board();  
+  feld = new Board(manager);  
   spieler1 = new Spieler(feld, 1);
   spieler2 = new Spieler(feld, 2);
   manager = new Manager(feld);

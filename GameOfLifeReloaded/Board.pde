@@ -1,5 +1,6 @@
 class Board
 {
+  Manager _manager;
 
   int cellWidth = 16;  //Größe der Zellen
   int cellHeight = 16;  
@@ -15,13 +16,30 @@ class Board
   color neutral = color(255,128,0); // Neutral = orange
   color dead = color(255);  //Tot = weiß
 
-  Board ()
+  Board (Manager manager)
   { 
+    _manager = manager;
     reset();
   }
   
   void display()
-  {    
+  {   
+    if (manager.player1Turn && isPaused)  //Wenn pausiert und Spieler1 an der Reihe, färbe Rand grün
+    {
+      fill(p1);       
+    } 
+    else if (isPaused)  //Sonst wenn pausiert, färbe Rand blau
+    {
+      fill(p2); 
+    }
+    else  //Färbe weiß wenn das Spiel läuft
+    {
+      noStroke();
+      fill(dead);  
+    }
+    
+    rect(0, 0, width, height - borderYbottom + borderYtop);  //Füllt den Rand mit jeweiliger Farbe
+    
     for (int x = 0; x < numberOfCellsX; x++)
     {
       for (int y = 0; y < numberOfCellsY; y++)
