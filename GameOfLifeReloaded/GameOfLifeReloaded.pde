@@ -3,9 +3,14 @@ Spieler spieler1;
 Spieler spieler2;
 Manager manager;
 
+public static int borderXleft = 16;
+public static int borderXright = 16;
+public static int borderYtop = 16;
+public static int borderYbottom = 200;
+
 void setup()
-{
-  size(1280,720);   
+{ 
+  size(800 + borderXleft + borderXright,640 + borderYtop + borderYbottom);   
   
   feld = new Board();  
   spieler1 = new Spieler(feld, 1);

@@ -1,12 +1,11 @@
 class Board
 {
-  Spieler spieler;
   
   int cellWidth = 16;  //Größe der Zellen
   int cellHeight = 16;  
-
-  float numberOfCellsX = width/cellWidth;  //Anzahl der Zellen horizontal und
-  float numberOfCellsY = height/cellHeight;  //vertikal, + Rand
+ 
+  float numberOfCellsX = width/cellWidth - borderXleft/cellWidth - borderXright/cellWidth;  //Anzahl der Zellen horizontal und
+  float numberOfCellsY = height/cellHeight - borderYbottom/cellHeight - borderYtop/cellHeight;  //vertikal, + Rand
   
   int status[][] = new int [(int) numberOfCellsX][(int) numberOfCellsY];  //Status der Zellen
   int saveStat[][] = new int [(int) numberOfCellsX][(int) numberOfCellsY];  //Array zum Zwischenspeichern
@@ -16,7 +15,7 @@ class Board
   color dead = color(255);  //Tot = weiß
 
   Board ()
-  {
+  { 
     for (int x = 0; x < numberOfCellsX; x++)
     {
       for (int y = 0; y < numberOfCellsY; y++)
@@ -45,7 +44,7 @@ class Board
           fill(dead);  //Sonst tot
         }
         stroke(0);
-        rect(cellWidth*x, cellHeight*y, cellWidth, cellHeight);
+        rect(cellWidth*x + borderXleft, cellHeight*y + borderYtop, cellWidth, cellHeight);
       }
     }
   }

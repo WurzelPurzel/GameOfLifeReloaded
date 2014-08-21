@@ -10,7 +10,7 @@ class Manager
   int lastRecordedTime = 0;  //Zeit, des zuletzt durchgeführten Zuges
   
   boolean player1Turn = true;
-
+  
   Manager(Board field)
   {
     _field = field;
