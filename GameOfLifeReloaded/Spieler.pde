@@ -21,7 +21,7 @@ class Spieler
 
 
 
-    { 
+   
     if ((mouseX >= borderXleft) && (mouseX <= width - borderXright) && (mouseY >= borderYtop) && (mouseY <= height - borderYbottom))  //Fülle nur, wenn Maus auch im Spielfeld ist, berücksichtigt den Rand 
     {
     	if (_field.saveStat[inCellX][inCellY] == 1 && _playerID == 1 )
@@ -54,7 +54,7 @@ class Spieler
         }
       } 
     }   
-   }
+   
 
       
     //Speichert Status      
