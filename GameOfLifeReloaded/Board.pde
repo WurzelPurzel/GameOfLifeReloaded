@@ -70,13 +70,17 @@ class Board
   void reset()
   {
     //Setze alle Zellen zurück
+    maxCellsNeutral = 50;
+    
     for (int x = 0; x < numberOfCellsX; x++)
     {
       for (int y = 0; y < numberOfCellsY; y++)
       {
-        if (status[x][y] != 3)
+        status[x][y] = 0;
+        if (x > numberOfCellsX/3 && x <= numberOfCellsX - numberOfCellsX/3 && maxCellsNeutral > 0 )
         {
-          status[x][y] = 0;
+          status [x][y] =3;
+          maxCellsNeutral -=1;
         }
       }
     } 
