@@ -1,17 +1,18 @@
 class Board
 {
-  
+
   int cellWidth = 16;  //Größe der Zellen
   int cellHeight = 16;  
- 
+
   float numberOfCellsX = width/cellWidth - borderXleft/cellWidth - borderXright/cellWidth;  //Anzahl der Zellen horizontal und
   float numberOfCellsY = height/cellHeight - borderYbottom/cellHeight - borderYtop/cellHeight;  //vertikal, + Rand
-  
+
   int status[][] = new int [(int) numberOfCellsX][(int) numberOfCellsY];  //Status der Zellen
   int saveStat[][] = new int [(int) numberOfCellsX][(int) numberOfCellsY];  //Array zum Zwischenspeichern
-  
+
   color p1 = color(0, 220, 0);  //Spieler1 = grün
   color p2 = color(0, 0, 220);  //Spieler2 = blau
+  color neutral = color(255, 255, 0); // Neutral = gelb
   color dead = color(255);  //Tot = weiß
 
   Board ()
@@ -19,8 +20,16 @@ class Board
     for (int x = 0; x < numberOfCellsX; x++)
     {
       for (int y = 0; y < numberOfCellsY; y++)
-      {
-        status[x][y] = 0;  //Zu Beginn alle Zellen tot
+      {  
+        if ( x > numberOfCellsX/3 && x <= numberOfCellsX - numberOfCellsX/3 && maxCellsNeutral > 0)
+        {
+          status [x][y] =3;
+          maxCellsNeutral -= 1;
+        }
+        else
+        {
+          status[x][y] = 0;  //Zu Beginn alle Zellen tot
+        }
       }
     }
   }
@@ -39,6 +48,10 @@ class Board
         {
           fill(p2);  //Wenn Zelle Status 2 hat, fülle Spieler2
         }
+        else if (status[x][y] == 3)
+        {
+          fill(neutral); //Wenn Zelle Status 3 hat, fülle neutral
+        }
         else
         {
           fill(dead);  //Sonst tot
@@ -47,8 +60,13 @@ class Board
         rect(cellWidth*x + borderXleft, cellHeight*y + borderYtop, cellWidth, cellHeight);
       }
     }
+    fill(0);
+    text("Cells Left P1:" +" "+ maxCellsP1, 50, height - (borderYbottom/2));
+    text("Cell Left P2:" + " "+ maxCellsP2, 600, height - (borderYbottom/2));
+    text("Cells P1 Total:" +" ", 50, height - (borderYbottom/3));
+    text("Cell P2 Total:" + " ", 600, height - (borderYbottom/3));
   }
- 
+
   void reset()
   {
     //Setze alle Zellen zurück
@@ -56,31 +74,35 @@ class Board
     {
       for (int y = 0; y < numberOfCellsY; y++)
       {
-        status[x][y] = 0; 
+        if (status[x][y] != 3)
+        {
+          status[x][y] = 0;
+        }
       }
     } 
-   maxCellsP1 = 25;
-   maxCellsP2 = 25; 
+    maxCellsP1 = 25;
+    maxCellsP2 = 25;
   }
-  
+
   void evolve()  //Wendet die Regeln jede Runde an
   {
     rounds -= 1;
-    
+
     for (int x = 0; x < numberOfCellsX; x++)  //Speichert Status
-        {
-          for (int y = 0; y < numberOfCellsY; y++)
-          {
-            saveStat[x][y] = status[x][y];
-          }  
-        }    
-    
+    {
+      for (int y = 0; y < numberOfCellsY; y++)
+      {
+        saveStat[x][y] = status[x][y];
+      }
+    }    
+
     for (int x = 0; x < numberOfCellsX; x++)  //Alle Zellen überprüfen
     {
       for (int y = 0; y < numberOfCellsY; y++)
       {
         int neighboursP1 = 0;  
-        int neighboursP2 = 0;  //Nachbarn jeder Farbe zählen
+        int neighboursP2 = 0;
+        int neighboursNeutral = 0;  //Nachbarn jeder Farbe zählen
         for (int xN = x-1; xN <= x+1; xN++)  //Alle Nachbarn überprüfen
         {
           for (int yN = y-1; yN <= y+1; yN++)
@@ -91,38 +113,65 @@ class Board
               {
                 if (saveStat[xN][yN] == 1)  //Nachbarn der p1 Farbe zählen
                 {
-                  neighboursP1++;  //Lebende Nachbarn zählen  
+                  neighboursP1++;  //Lebende Nachbarn zählen
                 }
                 else if (saveStat[xN][yN] == 2)  //Nachbarn der p2 Farbe zählen
                 {
                   neighboursP2++;  //Lebende Nachbarn zählen
                 }
-              }  
+                else if (saveStat[xN][yN] == 3)  //Nachbarn der neutral Farbe zählen
+                {
+                  neighboursNeutral++;  //Lebende Nachbarn zählen
+                }
+              }
             }
-          } 
+          }
         }
         //Jetzt Regeln anwenden
         if (saveStat[x][y] == 1)  //Wenn die Zelle lebt, je nach Nachbarzahl töten
         {
           if (neighboursP1 < 2 || neighboursP1 > 3)  //Wenn nicht 2-3 Nachbarn von Spieler1 leben, töten
           {
-            status[x][y] = 0;  //Töten  
+            status[x][y] = 0;  //Töten
           }
           else if ((neighboursP1 + 1) < neighboursP2)  //Wenn gewählte Zelle + ihre verbündeten Nachbarn weniger sind als gegnerische Nachbarn
           {
             status[x][y] = 2;  //Zelle wird übernommen
+          }
+          else if ((neighboursP1 + 1) < neighboursNeutral)  //Wenn gewählte Zelle + ihre verbündeten Nachbarn weniger sind als gegnerische Nachbarn
+          {
+            status[x][y] = 3;  //Zelle wird übernommen
           }
         }
         else if (saveStat[x][y] == 2)  //Gleiches für Spieler2 nochmal
         {
           if (neighboursP2 < 2 || neighboursP2 > 3)  
           {
-            status[x][y] = 0;  //Töten  
+            status[x][y] = 0;  //Töten
           } 
           else if ((neighboursP2 + 1) < neighboursP1)  //Wenn gewählte Zelle + ihre verbündeten Nachbarn weniger sind als gegnerische Nachbarn
           {
             status[x][y] = 1;  //Zelle wird übernommen
           } 
+          else if ((neighboursP2 + 1) < neighboursNeutral)  //Wenn gewählte Zelle + ihre verbündeten Nachbarn weniger sind als gegnerische Nachbarn
+          {
+            status[x][y] = 3;  //Zelle wird übernommen
+          }
+        } 
+        else if (saveStat[x][y] == 3)  //Gleiches für Neutral nochmal
+        {
+          if (neighboursNeutral < 2 || neighboursNeutral > 3)  
+          {
+            status[x][y] = 0;  //Töten
+          } 
+          else if ((neighboursNeutral + 1) < neighboursP1)  //Wenn gewählte Zelle + ihre verbündeten Nachbarn weniger sind als gegnerische Nachbarn
+          {
+            status[x][y] = 1;  //Zelle wird übernommen
+          } 
+          else if ((neighboursNeutral + 1) < neighboursP2)  //Wenn gewählte Zelle + ihre verbündeten Nachbarn weniger sind als gegnerische Nachbarn
+          {
+            status[x][y] = 2;  //Zelle wird übernommen
+          }
         }
         else  //Zelle ist tot, je nach Nachbarzahl beleben
         {
@@ -141,16 +190,19 @@ class Board
           }
           else if (neighboursP1 == 3)  //Spieler1
           {
-            status[x][y] = 1;    
+            status[x][y] = 1;
           }
           else if (neighboursP2 == 3) //Spieler2
           {
-            status[x][y] = 2;  
+            status[x][y] = 2;
+          }
+          else if (neighboursNeutral == 3)
+          {
+            status[x][y] = 3;
           }
         }
       }
-    }    
+    }
   }
-  
 }
 

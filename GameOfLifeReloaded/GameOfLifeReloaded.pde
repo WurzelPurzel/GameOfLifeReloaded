@@ -1,4 +1,4 @@
-Board feld; 
+ Board feld; 
 Spieler spieler1;
 Spieler spieler2;
 Manager manager;
@@ -9,7 +9,9 @@ public static int borderYtop = 16;
 public static int borderYbottom = 200;
 public static int maxCellsP1 = 25;
 public static int maxCellsP2 = 25;
+public static int maxCellsNeutral = 100;
 public static int rounds = 100;
+PFont TextFont;
 
 void setup()
 { 
@@ -19,6 +21,9 @@ void setup()
   spieler1 = new Spieler(feld, 1);
   spieler2 = new Spieler(feld, 2);
   manager = new Manager(feld);
+  TextFont = createFont("Arial", 16);
+  textFont(TextFont);
+  textAlign(LEFT,BOTTOM);
   
   background(255);
   stroke(0);
@@ -40,6 +45,7 @@ void mousePressed()
 
 void draw()
 {  
+  background(255);
   feld.display();
   if (millis() - manager.lastRecordedTime > manager.interval)  //Wenn das Interval überschritten wurde
   {
