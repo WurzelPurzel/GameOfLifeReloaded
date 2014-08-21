@@ -9,7 +9,7 @@ public static int borderYtop = 16;
 public static int borderYbottom = 200;
 public static int maxCellsP1 = 25;
 public static int maxCellsP2 = 25;
-public static int maxCellsNeutral = 100;
+public static int maxCellsNeutral = 50;
 public static int rounds = 100;
 PFont TextFont;
 

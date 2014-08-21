@@ -142,10 +142,6 @@ class Board
           {
             status[x][y] = 2;  //Zelle wird übernommen
           }
-          else if ((neighboursP1 + 1) < neighboursNeutral)  //Wenn gewählte Zelle + ihre verbündeten Nachbarn weniger sind als gegnerische Nachbarn
-          {
-            status[x][y] = 3;  //Zelle wird übernommen
-          }
         }
         else if (saveStat[x][y] == 2)  //Gleiches für Spieler2 nochmal
         {
@@ -157,10 +153,6 @@ class Board
           {
             status[x][y] = 1;  //Zelle wird übernommen
           } 
-          else if ((neighboursP2 + 1) < neighboursNeutral)  //Wenn gewählte Zelle + ihre verbündeten Nachbarn weniger sind als gegnerische Nachbarn
-          {
-            status[x][y] = 3;  //Zelle wird übernommen
-          }
         } 
         else if (saveStat[x][y] == 3)  //Gleiches für Neutral nochmal
         {
@@ -168,11 +160,11 @@ class Board
           {
             status[x][y] = 0;  //Töten
           } 
-          else if ((neighboursNeutral + 1) < neighboursP1)  //Wenn gewählte Zelle + ihre verbündeten Nachbarn weniger sind als gegnerische Nachbarn
+          else if (0 < neighboursP1)  //Wenn gewählte Zelle + ihre verbündeten Nachbarn weniger sind als gegnerische Nachbarn
           {
             status[x][y] = 1;  //Zelle wird übernommen
           } 
-          else if ((neighboursNeutral + 1) < neighboursP2)  //Wenn gewählte Zelle + ihre verbündeten Nachbarn weniger sind als gegnerische Nachbarn
+          else if (0 < neighboursP2)  //Wenn gewählte Zelle + ihre verbündeten Nachbarn weniger sind als gegnerische Nachbarn
           {
             status[x][y] = 2;  //Zelle wird übernommen
           }
