@@ -185,6 +185,35 @@ class Board
             status[x][y] = 2;  //Zelle wird übernommen
             currentCellsP2 += 1;
           }
+          else if (0 < neighboursP1 && 0 < neighboursP2)  //Wenn es blaue und grüne Nachbarn gibt
+          {
+            //Schaue welche mehr sind
+            if (neighboursP1 > neighboursP2)
+            {
+              status[x][y] = 1;
+              currentCellsP1 += 1;
+            } 
+            else if (neighboursP1 < neighboursP2)
+            {
+              status[x][y] = 2;
+              currentCellsP2 += 1;
+            } 
+            else if (neighboursP1 == neighboursP2)
+            {
+              //Lasse Zufall entscheiden
+              int r = int(random(1, 3));
+              if (r == 1)  //Wenn zufällige Zahl (1-2) 1 ist
+              {
+                status[x][y] = 1;  //Belebe Spieler1
+                currentCellsP1 += 1;
+              }  
+              else if (r == 2)
+              {
+                status[x][y] = 2;  //Sonst belebe Spieler2
+                currentCellsP2 += 1;
+              }
+            }
+          }
         }
         else  //Zelle ist tot, je nach Nachbarzahl beleben
         {
