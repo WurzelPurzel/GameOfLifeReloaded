@@ -12,7 +12,7 @@ class Board
 
   color p1 = color(0, 220, 0);  //Spieler1 = grün
   color p2 = color(0, 0, 220);  //Spieler2 = blau
-  color neutral = color(255,128,0); // Neutral = gelb
+  color neutral = color(255,128,0); // Neutral = orange
   color dead = color(255);  //Tot = weiß
 
   Board ()

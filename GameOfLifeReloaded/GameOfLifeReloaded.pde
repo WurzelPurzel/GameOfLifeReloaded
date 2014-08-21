@@ -6,11 +6,14 @@ Manager manager;
 public static int borderXleft = 16;
 public static int borderXright = 16;
 public static int borderYtop = 16;
-public static int borderYbottom = 200;
+public static int borderYbottom = 150;
 public static int maxCellsP1 = 25;
 public static int maxCellsP2 = 25;
 public static int rounds = 100;
+
+//Pause
 public static boolean isPaused = true;
+
 PFont TextFont;
 
 void setup()

@@ -2,8 +2,6 @@ class Manager
 {
   Board _field;
   
-  //Pause
-
   
   //Timer
   int interval = 100;  //Alle 0,1 Sekunden wird ein Zug durchgeführt
