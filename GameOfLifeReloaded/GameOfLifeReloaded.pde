@@ -8,7 +8,9 @@ public static int borderXright = 16;
 public static int borderYtop = 16;
 public static int borderYbottom = 150;
 public static int maxCellsP1 = 25;
+public static int currentCellsP1 = 0;
 public static int maxCellsP2 = 25;
+public static int currentCellsP2 = 0;
 public static int rounds = 100;
 
 //Pause

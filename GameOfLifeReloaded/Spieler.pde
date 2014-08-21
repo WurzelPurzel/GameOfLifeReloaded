@@ -23,37 +23,40 @@ class Spieler
    {
     if ((mouseX >= borderXleft) && (mouseX <= width - borderXright) && (mouseY >= borderYtop) && (mouseY <= height - borderYbottom))  //Fülle nur, wenn Maus auch im Spielfeld ist, berücksichtigt den Rand 
     {
-    	if (_field.saveStat[inCellX][inCellY] == 1 && _playerID == 1 )
-
+    	if (_field.saveStat[inCellX][inCellY] == 1 && _playerID == 1)
         {
        	 _field.status[inCellX][inCellY] = 0;  //Wenn Zelle lebt, egal ob Spieler1 oder Spieler2, dann töte
        	 fill(_field.dead);
-     	 maxCellsP1 += 1;     
-   	 }
-   	 else if(_field.saveStat[inCellX][inCellY] == 2 && _playerID == 2)
+     	 maxCellsP1 += 1;   
+         currentCellsP1 -= 1;  
+   	}
+   	else if(_field.saveStat[inCellX][inCellY] == 2 && _playerID == 2)
         {
           _field.status[inCellX][inCellY] = 0;  //Wenn Zelle lebt, egal ob Spieler1 oder Spieler2, dann töte
           fill(_field.dead);
           maxCellsP2 += 1;
+          currentCellsP2 -= 1;
         }
-      else
-      {
-        //sonst belebe
-      if (_playerID == 1 && maxCellsP1 > 0 && mouseX < width/3)
+        else
         {
-          _field.status[inCellX][inCellY] = 1;  //Spieler1
-          fill(_field.p1);
-        maxCellsP1 -= 1;
-        }
-      else if(_playerID == 2 && maxCellsP2 > 0 && mouseX > (width - width/3))
-        {
-          _field.status[inCellX][inCellY] = 2;  //Spieler2
-          fill(_field.p2);  
-        maxCellsP2 -= 1;
-        }
-      } 
-    }   
-   }
+          //sonst belebe
+        if ((_playerID == 1 && maxCellsP1 > 0 && mouseX < width/3) && (maxCellsP1 != 0))
+          {
+            _field.status[inCellX][inCellY] = 1;  //Spieler1
+            fill(_field.p1);
+          maxCellsP1 -= 1;
+          currentCellsP1 += 1;
+          }
+        else if((_playerID == 2 && maxCellsP2 > 0 && mouseX > (width - width/3)) && (maxCellsP2 != 0))
+          {
+            _field.status[inCellX][inCellY] = 2;  //Spieler2
+            fill(_field.p2);  
+          maxCellsP2 -= 1;
+          currentCellsP2 += 1;
+          }
+        } 
+      }   
+    }
 
       
     //Speichert Status      

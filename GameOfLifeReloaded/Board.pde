@@ -6,7 +6,7 @@ class Board
   int cellHeight = 16;  
 
   float numberOfCellsX = width/cellWidth - borderXleft/cellWidth - borderXright/cellWidth;  //Anzahl der Zellen horizontal und
-  float numberOfCellsY = height/cellHeight - borderYbottom/cellHeight - borderYtop/cellHeight;  //vertikal, + Rand
+  float numberOfCellsY = height/cellHeight - borderYbottom/cellHeight - borderYtop/cellHeight;  //vertikal, abzüglich Rand
 
   int status[][] = new int [(int) numberOfCellsX][(int) numberOfCellsY];  //Status der Zellen
   int saveStat[][] = new int [(int) numberOfCellsX][(int) numberOfCellsY];  //Array zum Zwischenspeichern
@@ -89,7 +89,9 @@ class Board
       }
     }  
     maxCellsP1 = 25;
+    currentCellsP1 = 0;
     maxCellsP2 = 25;
+    currentCellsP2 = 0;
   }
 
   void evolve()  //Wendet die Regeln jede Runde an
