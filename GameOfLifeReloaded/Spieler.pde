@@ -2,8 +2,6 @@ class Spieler
 {
   Board _field;
   int _playerID;
-  int maxCellsP1 = 25;
-  int maxCellsP2 = 25;
   
   Spieler(Board field, int playerID)
   {

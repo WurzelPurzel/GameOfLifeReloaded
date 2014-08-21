@@ -58,7 +58,9 @@ class Board
       {
         status[x][y] = 0; 
       }
-    }  
+    } 
+   maxCellsP1 = 25;
+   maxCellsP2 = 25; 
   }
   
   void evolve()  //Wendet die Regeln jede Runde an
