@@ -40,7 +40,7 @@ class Spieler
         else
         {
           //sonst belebe
-        if ((_playerID == 1 && maxCellsP1 > 0 && mouseX < width/3) && (maxCellsP1 != 0))
+        if ((_playerID == 1 && maxCellsP1 > 0 && mouseX < (width + borderXleft)/3) && (maxCellsP1 != 0))
           {
             _field.status[inCellX][inCellY] = 1;  //Spieler1
             fill(_field.p1);
