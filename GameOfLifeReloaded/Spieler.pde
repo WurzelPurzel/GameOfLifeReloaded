@@ -2,6 +2,7 @@ class Spieler
 {
   Board _field;
   int _playerID;
+  
 
   Spieler(Board field, int playerID)
   {
@@ -69,12 +70,20 @@ class Spieler
   
   void WinMessage()
   { 
+    textFont(Score);
     text("Spieler " + _playerID + " gewinnt!", width/2, height - (borderYbottom/2) + borderYtop);  
   }
   
   void DrawMessage()
   {  
+    textFont(Score);
     text("Unentschieden!", width/2, height - (borderYbottom/2) + borderYtop);  
+  }
+  
+  void SpecialEffect(color c)
+  {
+    
+    
   }
   
 }
