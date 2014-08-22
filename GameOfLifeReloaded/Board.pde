@@ -271,7 +271,18 @@ class Board
               status[x][y] = 2;  //Sonst belebe Spieler2
               currentCellsP2 += 1;
             }
-          } else if (neighboursP1 == 3)  //Spieler1
+          }
+          else if (neighboursP1 == 3 && neighboursNeutral == 3)  //Wenn Zelle jeweils von Spieler und Neutral 3 lebende Nachbarn hat, wähle den Spieler
+          {
+            status[x][y] = 1;
+            currentCellsP1 += 1;
+          } 
+          else if (neighboursP2 == 3 && neighboursNeutral == 3)
+          {
+            status[x][y] = 2;
+            currentCellsP2 += 1;
+          } 
+          else if (neighboursP1 == 3)  //Spieler1
           {
             status[x][y] = 1;
             currentCellsP1 += 1;
