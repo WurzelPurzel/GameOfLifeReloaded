@@ -22,6 +22,7 @@ class Manager
   {
     if (key == ' ')  //Pausiere/Beende Pause, wenn Space gedrückt wird
     {
+      hasBegun = true;
       if(!isPaused)
       {
       isPaused = true;

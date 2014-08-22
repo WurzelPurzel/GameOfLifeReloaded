@@ -36,7 +36,7 @@ class Spieler
           maxCellsP2 += 1;
           currentCellsP2 -= 1;
         } 
-        else
+        else if (!hasBegun)
         {
           //sonst belebe
           if ((_playerID == 1 && maxCellsP1 > 0 && mouseX < (width + borderXleft)/3) && (maxCellsP1 != 0))

@@ -13,6 +13,8 @@ public static int maxCellsP2 = 25;
 public static int currentCellsP2 = 0;
 public static int rounds = 100;
 
+public static boolean hasBegun = false;
+
 //Pause
 public static boolean isPaused = true;
 

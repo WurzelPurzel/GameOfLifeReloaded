@@ -121,6 +121,7 @@ class Board
     p1Won = false;
     draw = false;
     colored = false;
+    hasBegun = false;
   }
 
   void SpecialEffect()
